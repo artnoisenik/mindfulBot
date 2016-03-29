@@ -7,13 +7,14 @@ var T = new Twit({
   access_token_secret:  'k2UwHnDZdyP11ysv03pfnPlJaZaY4U2QEDYXA39ld1DIQ',
 })
 
-function retweetRecent() {T.get('search/tweets', {q: "#mindful OR #mindfulness", result_type: "recent"}, function (err, data, response) {
+function retweetRecent() {T.get('search/tweets', {q: "#fashion", result_type: "popular"}, function (err, data, response) {
   if (!err) {
-    var retweetId = data.statuses[0].id_str;
+    var rando = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
+    var retweetId = data.statuses[rando].id_str;
     T.post('statuses/retweet/' + retweetId, { }, function (err, response) {
       if (response) { console.log('Retweeted Tweet ID: ' + retweetId); }
         if (err) { console.log('Retweet Error: ', err); } }); }
         else { console.log('Search Error: ', err); } });}
 
 retweetRecent();
-setInterval(retweetRecent, 1800000);
+setInterval(retweetRecent, 300000);
